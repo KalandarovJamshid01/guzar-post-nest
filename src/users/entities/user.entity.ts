@@ -1,6 +1,7 @@
+import { AbstractEntity } from 'src/database/abstract.entity';
 import { Column } from 'typeorm';
 
-export class User {
+export class User extends AbstractEntity<User> {
   @Column({ type: 'date', nullable: true })
   birth_date: Date;
   @Column({ type: 'varchar', length: 255, nullable: true })
@@ -17,6 +18,7 @@ export class User {
 
   @Column({ type: 'varchar', length: 255, unique: true })
   email: string;
+
   @Column({ type: 'varchar', length: 255, nullable: true })
   first_name: string;
 
@@ -61,4 +63,25 @@ export class User {
 
   @Column({ type: 'varchar', length: 255, nullable: true })
   password: string;
+
+  @Column({
+    type: 'enum',
+    enum: [
+      'superadmin',
+      'admin',
+      'moderator',
+      'client',
+      'admin_app',
+      'admin_bin',
+      'admin_ptt',
+      'admin_cargo',
+      'admin_cpt',
+      'admin_bts',
+    ],
+    default: 'client',
+  })
+  role: string;
+
+  @Column({ type: 'int', nullable: true })
+  limit: number;
 }
