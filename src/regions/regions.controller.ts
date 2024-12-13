@@ -16,7 +16,7 @@ export class RegionsController {
   constructor(private readonly regionsService: RegionsService) {}
 
   @Post()
-  create(@Body() createRegionDto: CreateRegionDto) {
+  create(@Body() createRegionDto: CreateRegionDto[]) {
     return this.regionsService.create(createRegionDto);
   }
 
