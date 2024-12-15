@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { RegionsModule } from './regions/regions.module';
 import { DistrictsModule } from './districts/districts.module';
 import { QuartersModule } from './quarters/quarters.module';
+import { AdressesModule } from './adresses/adresses.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { QuartersModule } from './quarters/quarters.module';
     RegionsModule,
     DistrictsModule,
     QuartersModule,
+    AdressesModule,
   ],
   controllers: [],
   providers: [],
