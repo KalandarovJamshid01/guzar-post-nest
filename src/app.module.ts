@@ -6,6 +6,7 @@ import { RegionsModule } from './regions/regions.module';
 import { DistrictsModule } from './districts/districts.module';
 import { QuartersModule } from './quarters/quarters.module';
 import { AdressesModule } from './adresses/adresses.module';
+import { StepsModule } from './steps/steps.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { AdressesModule } from './adresses/adresses.module';
     DistrictsModule,
     QuartersModule,
     AdressesModule,
+    StepsModule,
   ],
   controllers: [],
   providers: [],
