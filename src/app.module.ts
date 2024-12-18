@@ -8,6 +8,7 @@ import { QuartersModule } from './quarters/quarters.module';
 import { AdressesModule } from './adresses/adresses.module';
 import { StepsModule } from './steps/steps.module';
 import { CountriesModule } from './countries/countries.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CountriesModule } from './countries/countries.module';
     AdressesModule,
     StepsModule,
     CountriesModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
