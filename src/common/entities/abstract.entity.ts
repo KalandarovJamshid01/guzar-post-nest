@@ -11,7 +11,7 @@ export class AbstractEntity<T> {
 
   @UpdateDateColumn()
   updatedAt: Date;
-  construct(entity: Partial<T>) {
+  constructor(entity: Partial<T>) {
     Object.assign(this, entity);
   }
 }
