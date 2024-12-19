@@ -1,4 +1,4 @@
-import { AbstractEntity } from 'src/modules/database/abstract.entity';
+import { AbstractEntity } from 'src/common/entities/abstract.entity';
 import { Quarter } from 'src/modules/quarters/entities/quarter.entity';
 import { Region } from 'src/modules/regions/entities/region.entity';
 import { Column, ManyToOne, OneToMany } from 'typeorm';

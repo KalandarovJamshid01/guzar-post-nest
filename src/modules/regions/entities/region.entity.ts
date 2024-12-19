@@ -1,4 +1,4 @@
-import { AbstractEntity } from 'src/modules/database/abstract.entity';
+import { AbstractEntity } from 'src/common/entities/abstract.entity';
 import { District } from 'src/modules/districts/entities/district.entity';
 import { Column, OneToMany } from 'typeorm';
 

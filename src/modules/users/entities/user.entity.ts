@@ -1,4 +1,4 @@
-import { AbstractEntity } from 'src/modules/database/abstract.entity';
+import { AbstractEntity } from 'src/common/entities/abstract.entity';
 import { Column } from 'typeorm';
 
 export class User extends AbstractEntity<User> {
