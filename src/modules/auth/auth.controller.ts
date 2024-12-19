@@ -13,10 +13,8 @@ import { AuthDto } from './dto/auth-dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService) {}
   @HttpCode(200)
   @Post('/login')
-  async login(@Body() { email, password }: AuthDto) {
-      
-  }
+  async login(@Body() { email, password }: AuthDto) {}
 }

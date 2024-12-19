@@ -1,6 +1,6 @@
-import { AbstractEntity } from 'src/database/abstract.entity';
-import { Quarter } from 'src/quarters/entities/quarter.entity';
-import { Region } from 'src/regions/entities/region.entity';
+import { AbstractEntity } from 'src/modules/database/abstract.entity';
+import { Quarter } from 'src/modules/quarters/entities/quarter.entity';
+import { Region } from 'src/modules/regions/entities/region.entity';
 import { Column, ManyToOne, OneToMany } from 'typeorm';
 
 export class District extends AbstractEntity<District> {

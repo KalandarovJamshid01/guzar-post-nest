@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from './database/database.module';
+import { DatabaseModule } from './modules/database/database.module';
 import { ConfigModule } from '@nestjs/config';
-import { UsersModule } from './users/users.module';
-import { RegionsModule } from './regions/regions.module';
-import { DistrictsModule } from './districts/districts.module';
-import { QuartersModule } from './quarters/quarters.module';
-import { AdressesModule } from './adresses/adresses.module';
-import { StepsModule } from './steps/steps.module';
-import { CountriesModule } from './countries/countries.module';
-import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
+import { RegionsModule } from './modules/regions/regions.module';
+import { DistrictsModule } from './modules//districts/districts.module';
+import { QuartersModule } from './modules/quarters/quarters.module';
+import { AdressesModule } from './modules/adresses/adresses.module';
+import { StepsModule } from './modules/steps/steps.module';
+import { CountriesModule } from './modules/countries/countries.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
