@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import {
   IsString,
   IsOptional,
@@ -5,9 +6,11 @@ import {
   IsInt,
   IsDate,
   IsEmail,
+  IsNotEmpty,
 } from 'class-validator';
 
 export class CreateUserDto {
+ 
   @IsString()
   @IsOptional()
   first_name?: string;
@@ -36,8 +39,9 @@ export class CreateUserDto {
   @IsOptional()
   per_adr?: string;
 
-  @IsInt()
-  pin: number; // required field
+  @IsInt({ message: 'pin must be an integer number' })
+  @IsNotEmpty({ message: 'pin should not be empty' })
+  pin: number;
 
   @IsDate()
   @IsOptional()
@@ -86,8 +90,8 @@ export class CreateUserDto {
   @IsOptional()
   limit?: number;
 
-  @IsEmail()
-  email: string; // required field
+  @IsEmail({}, { message: 'email must be an email' })
+  email: string;
 
   @IsString()
   @IsOptional()
