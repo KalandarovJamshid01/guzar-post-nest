@@ -7,7 +7,7 @@ export class GenericRepository<T extends AbstractEntity<T>> {
   constructor(private readonly repo: Repository<T>) {}
 
   async create(data: any | any[]): Promise<T | T[]> {
-    const newEntity = this.repo.create(data); // Yangi entity yaratish
+    const newEntity = this.repo.create(data);
     return this.repo.save(newEntity);
   }
 
@@ -26,4 +26,5 @@ export class GenericRepository<T extends AbstractEntity<T>> {
   async remove(id: number) {
     await this.repo.delete({ id } as FindOptionsWhere<T>);
   }
+
 }

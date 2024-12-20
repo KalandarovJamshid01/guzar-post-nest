@@ -1,6 +1,7 @@
 import { AbstractEntity } from 'src/common/entities/abstract.entity';
-import { Column } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 
+@Entity()
 export class User extends AbstractEntity<User> {
   @Column({ type: 'date', nullable: true })
   birth_date: Date;
@@ -10,7 +11,7 @@ export class User extends AbstractEntity<User> {
   @Column({ type: 'varchar', length: 255, nullable: true })
   pport_no: string;
 
-  @Column({ type: 'varchar', length: 255, unique: true })
+  @Column({ type: 'varchar', length: 255, nullable: true, unique: true })
   user_id: string;
 
   @Column({ type: 'varchar', length: 255, nullable: true })

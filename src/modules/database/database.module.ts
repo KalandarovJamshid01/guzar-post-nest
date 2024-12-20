@@ -14,6 +14,7 @@ import { ConfigService } from '@nestjs/config';
           password: configService.get('MYSQL_PASSWORD'),
           database: configService.get('MYSQL_DATABASE'),
           autoLoadEntities: true,
+          synchronize: true,
         };
       },
       inject: [ConfigService],
