@@ -14,8 +14,8 @@ export class CountriesService {
     return this.countryRepository.create(createCountryDto);
   }
 
-  findAll() {
-    return this.countryRepository.findAll();
+  findAll(options) {
+    return this.countryRepository.findAll(options);
   }
 
   findOne(id: number) {

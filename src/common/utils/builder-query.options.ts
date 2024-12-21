@@ -24,7 +24,9 @@ export function buildQueryOption(query: any, searchFields: string[]) {
     }));
     whereConditions.push(...search);
   }
+
   if (query.between) {
+    query.between = JSON.parse(query.between);
     const betweenField = Object.keys(query.between)[0];
     const [start, end] = query.between[betweenField];
     whereConditions.push({
@@ -32,6 +34,7 @@ export function buildQueryOption(query: any, searchFields: string[]) {
     });
   }
   if (query.in) {
+    query.in = JSON.parse(query.in);
     const inField = Object.keys(query.in)[0];
     const values = query.in[inField];
     whereConditions.push({
@@ -42,6 +45,6 @@ export function buildQueryOption(query: any, searchFields: string[]) {
   if (whereConditions.length > 0) {
     options.where = whereConditions;
   }
-
+  console.log(options);
   return options;
 }

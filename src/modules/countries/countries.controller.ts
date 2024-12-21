@@ -1,7 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { CountriesService } from './countries.service';
 import { CreateCountryDto } from './dto/create-country.dto';
 import { UpdateCountryDto } from './dto/update-country.dto';
+import { buildQueryOption } from 'src/common/utils/builder-query.options';
 
 @Controller('countries')
 export class CountriesController {
@@ -13,8 +23,9 @@ export class CountriesController {
   }
 
   @Get()
-  findAll() {
-    return this.countriesService.findAll();
+  findAll(@Query() query: any) {
+    const options = buildQueryOption(query, ['name', 'code']);
+    return this.countriesService.findAll(options);
   }
 
   @Get(':id')
