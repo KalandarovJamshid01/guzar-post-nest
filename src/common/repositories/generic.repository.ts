@@ -24,9 +24,9 @@ export class GenericRepository<T extends AbstractEntity<T>> {
     }
   }
 
-  async findAll(): Promise<T[]> {
+  async findAll(options): Promise<T[]> {
     try {
-      return this.repo.find();
+      return this.repo.find(options);
     } catch (error) {
       this.logger.error(error);
       throw new InternalServerErrorException(`error.message`);

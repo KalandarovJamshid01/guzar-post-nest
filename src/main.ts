@@ -10,6 +10,7 @@ async function bootstrap() {
   app.use(new LoggerMiddleware().use);
   // app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useGlobalFilters(new AllExceptionsFilter());
+  
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

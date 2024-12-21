@@ -14,8 +14,8 @@ export class UsersService {
     return this.userRepository.create(createUserDto);
   }
 
-  findAll() {
-    return this.userRepository.findAll();
+  findAll(options) {
+    return this.userRepository.findAll(options);
   }
 
   findOne(id: number) {
