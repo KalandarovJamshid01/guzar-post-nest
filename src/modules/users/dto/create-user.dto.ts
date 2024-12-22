@@ -1,4 +1,3 @@
-
 import {
   IsString,
   IsOptional,
@@ -10,7 +9,6 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto {
- 
   @IsString()
   @IsOptional()
   first_name?: string;

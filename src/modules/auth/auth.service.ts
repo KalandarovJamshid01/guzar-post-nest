@@ -7,5 +7,5 @@ import { AuthDto } from './dto/auth-dto';
 export class AuthService {
   // constructor(private readonly userRepository: GenericRepository<User>) {}
 
-   login(authDto: AuthDto) {}
+  login(authDto: AuthDto) {}
 }

@@ -17,8 +17,8 @@ export class ResponseInterCeptor implements NestInterceptor {
         const statusCode = response.statusCode || 200;
         // const { page, limit } = paginationHelper(request);
         return {
-          status: 'Success',
-          code: statusCode,
+          status: true,
+          statusCode: statusCode,
           meta: data.count
             ? {
                 total: data.count,
