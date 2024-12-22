@@ -13,20 +13,24 @@ export class GenericRepository<T extends AbstractEntity<T>> {
   private readonly logger = new Logger(GenericRepository.name);
   constructor(private readonly repo: Repository<T>) {}
 
-  async create(data: any | any[]): Promise<T | T[]> {
+  async create(data: any | any[]): Promise<T | { data: T[]; count: number }> {
     try {
       const newEntity = await this.repo.create(data);
       this.logger.log(newEntity);
-      return this.repo.save(newEntity);
+      const entity = await this.repo.save(newEntity);
+      return Array.isArray(entity)
+        ? { data: entity, count: data.length }
+        : entity;
     } catch (error) {
       this.logger.error(error);
       throw new BadRequestException(error.message);
     }
   }
 
-  async findAll(options): Promise<T[]> {
+  async findAll(options): Promise<{ data: T[]; count: number }> {
     try {
-      return this.repo.find(options);
+      const [data, count] = await this.repo.findAndCount(options);
+      return { data, count };
     } catch (error) {
       this.logger.error(error);
       throw new InternalServerErrorException(`error.message`);

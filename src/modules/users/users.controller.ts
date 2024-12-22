@@ -23,14 +23,13 @@ export class UsersController {
   @Post()
   // @UsePipes(new ValidationPipe())
   create(@Body() createUserDto: CreateUserDto) {
-    this.logger.log(createUserDto);
     return this.usersService.create(createUserDto);
   }
 
   @Get()
-  findAll(@Query() query: any) {
+  async findAll(@Query() query: any) {
     const options = buildQueryOption(query, ['full_name', 'email']);
-    return this.usersService.findAll(options);
+    return await this.usersService.findAll(options);
   }
 
   @Get(':id')

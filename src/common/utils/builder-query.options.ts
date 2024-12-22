@@ -1,10 +1,10 @@
 import { Between, FindManyOptions, In, Like } from 'typeorm';
+import { paginationHelper } from '../helpers/pagination.helper';
 
 export function buildQueryOption(query: any, searchFields: string[]) {
   const options: FindManyOptions = {};
   //Pagination
-  const page: number = query.page ? parseInt(query.page, 10) : 1;
-  const limit: number = query.limit ? parseInt(query.limit) : 10;
+  const { page, limit } = paginationHelper(query);
   options.skip = (page - 1) * limit;
   options.take = limit;
 
