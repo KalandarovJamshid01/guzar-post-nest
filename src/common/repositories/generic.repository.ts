@@ -52,7 +52,7 @@ export class GenericRepository<T extends AbstractEntity<T>> {
 
   async findOneBy(options: FindOneOptions): Promise<T | null> {
     try {
-      const entity = await this.repo.findOneBy(options as FindOptionsWhere<T>);
+      const entity = await this.repo.findOne(options as FindOneOptions<T>);
       if (!entity) {
         throw new NotFoundException(`Entity not found`);
       }

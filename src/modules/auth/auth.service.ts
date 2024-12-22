@@ -9,18 +9,18 @@ import { User } from '../users/entities/user.entity';
 import { AuthDto } from './dto/auth-dto';
 import { compareSync, genSaltSync, hashSync } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
+import { UsersService } from '../users/users.service';
+import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class AuthService {
   constructor(
     @Inject('User Repository')
     private readonly userRepository: GenericRepository<User>,
     private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
   ) {}
 
-  async validateUser(
-    email: string,
-    password: string,
-  ): Promise<Pick<User, 'email'>> {
+  async validateUser(email: string, password: string): Promise<User> {
     const user = await this.userRepository.findOneBy({
       where: { email: email },
     });
@@ -31,13 +31,17 @@ export class AuthService {
     if (!isCorrectPassword) {
       throw new UnauthorizedException('The Password is wrong!');
     }
-    return { email: user.email };
+    return user;
   }
 
-  createToken(email: string, jwtSecret: string, expiresIn: string) {
-    return {
-      token: this.jwtService.sign({ email }, { secret: jwtSecret, expiresIn }),
-    };
+  private generateToken(email: string, type: 'access' | 'refresh') {
+    const secretKey = this.configService.get(
+      type === 'access' ? 'JWT_SECRET_ACCESS' : 'JWT_SECRET_REFRESH',
+    );
+    const expiresIn = this.configService.get(
+      type === 'access' ? 'JWT_EXPIRES_IN_ACCESS' : 'JWT_EXPIRES_IN_REFRESH',
+    );
+    return this.jwtService.sign({ email }, { secret: secretKey, expiresIn });
   }
   async login(
     email: string,
@@ -45,16 +49,8 @@ export class AuthService {
   ): Promise<{ access_token: string; refresh_token: string }> {
     const validatedEmail = await this.validateUser(email, password);
     return {
-      access_token: this.createToken(
-        validatedEmail.email,
-        process.env.JWT_SECRET_ACCESS,
-        process.env.JWT_EXPIRES_IN_ACCESS,
-      ).token,
-      refresh_token: this.createToken(
-        validatedEmail.email,
-        process.env.JWT_SECRET_REFRESH,
-        process.env.JWT_EXPIRES_IN_REFRESH,
-      ).token,
+      access_token: this.generateToken(validatedEmail.email, 'access'),
+      refresh_token: this.generateToken(validatedEmail.email, 'refresh'),
     };
   }
 }

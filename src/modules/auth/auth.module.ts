@@ -6,6 +6,8 @@ import { User } from '../users/entities/user.entity';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { UsersService } from '../users/users.service';
 
 @Module({
   imports: [
@@ -14,6 +16,12 @@ import { JwtModule } from '@nestjs/jwt';
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET_ACCESS'),
+        signOptions: {
+          expiresIn: configService.get<string>('JWT_EXPIRES_IN_ACCESS'),
+        },
+      }),
     }),
   ],
   controllers: [AuthController],
