@@ -34,23 +34,27 @@ export class AuthService {
     return user;
   }
 
-  private generateToken(email: string, type: 'access' | 'refresh') {
+  private generateToken(user: User, type: 'access' | 'refresh') {
+    const { id, email, role } = user;
     const secretKey = this.configService.get(
       type === 'access' ? 'JWT_SECRET_ACCESS' : 'JWT_SECRET_REFRESH',
     );
     const expiresIn = this.configService.get(
       type === 'access' ? 'JWT_EXPIRES_IN_ACCESS' : 'JWT_EXPIRES_IN_REFRESH',
     );
-    return this.jwtService.sign({ email }, { secret: secretKey, expiresIn });
+    return this.jwtService.sign(
+      { id, email, role },
+      { secret: secretKey, expiresIn },
+    );
   }
   async login(
     email: string,
     password: string,
   ): Promise<{ access_token: string; refresh_token: string }> {
-    const validatedEmail = await this.validateUser(email, password);
+    const user = await this.validateUser(email, password);
     return {
-      access_token: this.generateToken(validatedEmail.email, 'access'),
-      refresh_token: this.generateToken(validatedEmail.email, 'refresh'),
+      access_token: this.generateToken(user, 'access'),
+      refresh_token: this.generateToken(user, 'refresh'),
     };
   }
 }

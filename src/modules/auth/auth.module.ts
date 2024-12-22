@@ -6,8 +6,7 @@ import { User } from '../users/entities/user.entity';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
-import { UsersService } from '../users/users.service';
+import { JwtSrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -33,7 +32,8 @@ import { UsersService } from '../users/users.service';
         new GenericRepository<User>(userRepository),
       inject: [getRepositoryToken(User)], // UserRepository ni to'g'ri inject qilish
     },
+    JwtSrategy,
   ],
-  exports: ['User Repository'],
+  exports: ['User Repository', JwtSrategy],
 })
 export class AuthModule {}
