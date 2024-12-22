@@ -5,7 +5,7 @@ import {
   Logger,
   NotFoundException,
 } from '@nestjs/common';
-import { FindOptionsWhere, Repository } from 'typeorm';
+import { FindOneOptions, FindOptionsWhere, Repository } from 'typeorm';
 import { AbstractEntity } from '../entities/abstract.entity';
 
 @Injectable()
@@ -50,6 +50,18 @@ export class GenericRepository<T extends AbstractEntity<T>> {
     }
   }
 
+  async findOneBy(options: FindOneOptions): Promise<T | null> {
+    try {
+      const entity = await this.repo.findOneBy(options as FindOptionsWhere<T>);
+      if (!entity) {
+        throw new NotFoundException(`Entity not found`);
+      }
+      return entity;
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException(error.message);
+    }
+  }
   async update(id: number, data: any): Promise<T | null> {
     try {
       const entity = await this.findById(id);

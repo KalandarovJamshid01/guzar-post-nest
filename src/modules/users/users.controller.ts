@@ -14,7 +14,9 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { buildQueryOption } from 'src/common/utils/builder-query.options';
+import { buildQueryManyOptions } from 'src/common/utils/build-query.many-options';
+import { query } from 'express';
+import { buildQueryOneOptions } from 'src/common/utils/build-query.one-options';
 
 @Controller('users')
 export class UsersController {
@@ -28,13 +30,19 @@ export class UsersController {
 
   @Get()
   async findAll(@Query() query: any) {
-    const options = buildQueryOption(query, ['full_name', 'email']);
+    const options = buildQueryManyOptions(query, ['full_name', 'email']);
     return await this.usersService.findAll(options);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+    return this.usersService.findById(+id);
+  }
+
+  @Get('find-one')
+  async findOneBy(@Query() query: any) {
+    const options = buildQueryOneOptions(query);
+    return await this.usersService.findOneBy(options);
   }
 
   @Patch(':id')

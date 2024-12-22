@@ -11,7 +11,7 @@ import {
 import { CountriesService } from './countries.service';
 import { CreateCountryDto } from './dto/create-country.dto';
 import { UpdateCountryDto } from './dto/update-country.dto';
-import { buildQueryOption } from 'src/common/utils/builder-query.options';
+import { buildQueryManyOptions } from 'src/common/utils/build-query.many-options';
 
 @Controller('countries')
 export class CountriesController {
@@ -24,7 +24,7 @@ export class CountriesController {
 
   @Get()
   findAll(@Query() query: any) {
-    const options = buildQueryOption(query, ['name', 'code']);
+    const options = buildQueryManyOptions(query, ['name', 'code']);
     return this.countriesService.findAll(options);
   }
 

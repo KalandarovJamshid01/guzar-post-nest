@@ -1,7 +1,11 @@
 import { Between, FindManyOptions, In, Like } from 'typeorm';
 import { paginationHelper } from '../helpers/pagination.helper';
 
-export function buildQueryOption(query: any, searchFields: string[]) {
+export function buildQueryManyOptions(
+  query: any,
+  searchFields: string[],
+  relations?: string[],
+) {
   const options: FindManyOptions = {};
   //Pagination
   const { page, limit } = paginationHelper(query);
@@ -45,6 +49,9 @@ export function buildQueryOption(query: any, searchFields: string[]) {
   if (whereConditions.length > 0) {
     options.where = whereConditions;
   }
-  console.log(options);
+  if (relations && relations.length > 0) {
+    options.relations = relations;
+  }
+
   return options;
 }

@@ -3,6 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { GenericRepository } from 'src/common/repositories/generic.repository';
 import { User } from './entities/user.entity';
+import { FindOneOptions } from 'typeorm';
 
 @Injectable()
 export class UsersService {
@@ -18,8 +19,11 @@ export class UsersService {
     return this.userRepository.findAll(options);
   }
 
-  findOne(id: number) {
+  findById(id: number) {
     return this.userRepository.findById(id);
+  }
+  findOneBy(options: FindOneOptions) {
+    return this.userRepository.findOneBy(options);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
