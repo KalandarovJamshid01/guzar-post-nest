@@ -37,9 +37,12 @@ export class GenericRepository<T extends AbstractEntity<T>> {
     }
   }
 
-  async findById(id: number): Promise<T | null> {
+  async findById(id: number, relations?: string[]): Promise<T | null> {
     try {
-      const entity = await this.repo.findOneBy({ id } as FindOptionsWhere<T>);
+      const entity = await this.repo.findOne({
+        where: { id } as FindOptionsWhere<T>,
+        relations,
+      });
       if (!entity) {
         throw new NotFoundException(`Entity with id ${id} not found`);
       }

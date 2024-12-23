@@ -7,11 +7,13 @@ import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtSrategy } from './strategies/jwt.strategy';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
     ConfigModule,
+    HttpModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

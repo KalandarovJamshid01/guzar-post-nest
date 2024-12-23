@@ -11,6 +11,7 @@ import {
   ValidationPipe,
   Query,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -41,22 +42,32 @@ export class UsersController {
     const options = buildQueryManyOptions(query, ['full_name', 'email']);
     return await this.usersService.findAll(options);
   }
+
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findById(@Param('id') id: string) {
     return this.usersService.findById(+id);
   }
+
   @UseGuards(JwtAuthGuard)
   @Get('find-one')
   async findOneBy(@Query() query: any) {
     const options = buildQueryOneOptions(query);
     return await this.usersService.findOneBy(options);
   }
+
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  async userMe(@Req() req) {
+    return await this.usersService.findById(req.user.id);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
+
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin', 'superadmin')
   @Delete(':id')
