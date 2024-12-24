@@ -2,15 +2,12 @@ import {
   BadRequestException,
   Inject,
   Injectable,
-  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { GenericRepository } from 'src/common/repositories/generic.repository';
 import { User } from '../users/entities/user.entity';
-import { AuthDto } from './dto/auth-dto';
 import { compareSync, genSaltSync, hashSync } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
-import { UsersService } from '../users/users.service';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
