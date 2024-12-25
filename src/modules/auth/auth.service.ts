@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { GenericRepository } from 'src/common/repositories/generic.repository';
 import { User } from '../users/entities/user.entity';
-import { compareSync, genSaltSync, hashSync } from 'bcryptjs';
+import { compareSync } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
@@ -49,7 +49,7 @@ export class AuthService {
       { secret: secretKey, expiresIn },
     );
   }
-  
+
   async login(
     email: string,
     password: string,
