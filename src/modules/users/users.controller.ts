@@ -43,6 +43,7 @@ export class UsersController {
     return await this.usersService.findAll(options);
   }
 
+  
   @UseGuards(JwtAuthGuard)
   @Get(':id')
   findById(@Param('id') id: string) {
