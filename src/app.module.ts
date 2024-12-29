@@ -9,7 +9,7 @@ import { AdressesModule } from './modules/adresses/adresses.module';
 import { StepsModule } from './modules/steps/steps.module';
 import { CountriesModule } from './modules/countries/countries.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { DeliveryPricingModule } from './delivery_pricing/delivery_pricing.module';
+import { DeliveryPricingModule } from './modules/delivery_pricing/delivery_pricing.module';
 
 @Module({
   imports: [

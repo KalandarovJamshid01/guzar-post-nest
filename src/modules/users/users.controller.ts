@@ -7,8 +7,6 @@ import {
   Param,
   Delete,
   Logger,
-  UsePipes,
-  ValidationPipe,
   Query,
   UseGuards,
   Req,
