@@ -4,18 +4,13 @@ import { UpdateDeliveryPricingDto } from './dto/update-delivery_pricing.dto';
 
 @Injectable()
 export class DeliveryPricingService {
-  create(createDeliveryPricingDto: CreateDeliveryPricingDto) {
-  }
+  create(createDeliveryPricingDto: CreateDeliveryPricingDto) {}
 
-  findAll() {
-  }
+  findAll() {}
 
-  findOne(id: number) {
-  }
+  findOne(id: number) {}
 
-  update(id: number, updateDeliveryPricingDto: UpdateDeliveryPricingDto) {
-  }
+  update(id: number, updateDeliveryPricingDto: UpdateDeliveryPricingDto) {}
 
-  remove(id: number) {
-  }
+  remove(id: number) {}
 }
